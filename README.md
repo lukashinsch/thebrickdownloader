@@ -8,7 +8,7 @@ Useful to download all documents from the 'old' management company's portal.
 
 To run you need a java runtime (version 17 or newer)
 
-Download the downloader binary from [here](https://github.com/lukashinsch/thebrickdownloader/releases/download/0.0.1/TheBrickDocumentDownloader.jar)
+Download the downloader binary from [here](https://github.com/lukashinsch/thebrickdownloader/releases/download/0.0.2/TheBrickDocumentDownloader.jar)
 
 ### Syntax
 
