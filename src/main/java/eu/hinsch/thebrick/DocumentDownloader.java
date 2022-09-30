@@ -30,6 +30,7 @@ public class DocumentDownloader implements ApplicationRunner {
 
     private static final String LOGIN_URL = "https://serviceportal.wentzel-dr.de/login";
     private static final String API_VERSION = "1.5.0";
+    private static final String[] INVALID_CHARS = new String[]{"/", "\\", ":", "?", "<", ">", "*", "'", "\"", "`", "|", "@", "#", "^"};
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final HttpClient client = HttpClient.newHttpClient();
@@ -142,18 +143,29 @@ public class DocumentDownloader implements ApplicationRunner {
         log.info("About to download {} documents", documents.length);
         for (int i = 0; i < documents.length; i++) {
             Document document = documents[i];
-            String folder = document.type() != null ? File.separator + document.type().title() : "";
-            String typeFolder = baseFolder + folder;
-            createFolderIfNotExists(typeFolder);
+            try {
+                String folder = document.type() != null ? File.separator + document.type().title() : "";
+                String typeFolder = baseFolder + folder;
+                createFolderIfNotExists(typeFolder);
 
-            String docName = "[" + i + "] " + document.name();
-            docName = docName.replace("/", "_");
-            log.info("Downloading file {}/{} ({})", folder, docName, document.linkToDocument());
-            Path target = Paths.get(typeFolder, docName);
+                String docName = "[" + i + "] " + document.name();
+                docName = sanitizeFileName(docName);
+                log.info("Downloading file {}/{} ({})", folder, docName, document.linkToDocument());
+                Path target = Paths.get(typeFolder, docName);
 
-            downloadDocument(document, target);
-            setFileDates(document, target);
+                downloadDocument(document, target);
+                setFileDates(document, target);
+            } catch (Exception e) {
+                log.error("Error processing document {}", document, e);
+            }
         }
+    }
+
+    private static String sanitizeFileName(String docName) {
+        for (String c : INVALID_CHARS) {
+            docName = docName.replace(c, "_");
+        }
+        return docName;
     }
 
     private void downloadDocument(Document document, Path target) throws URISyntaxException, IOException, InterruptedException {

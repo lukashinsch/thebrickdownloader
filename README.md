@@ -12,7 +12,7 @@ Download the downloader binary from [here](https://github.com/lukashinsch/thebri
 
 ### Syntax
 
-`java -jar TheBrickDocuemntDownloader.jar --username=... --password=... --folder=...`
+`java -jar TheBrickDocumentDownloader.jar --username=... --password=... --folder=...`
 
 username/password: the username and password used to log into serviceportal.wentzel-dr.de
 
