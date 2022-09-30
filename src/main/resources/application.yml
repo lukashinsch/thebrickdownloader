@@ -1,0 +1,10 @@
+logging:
+  level:
+    root: ERROR
+    eu.hinsch.thebrick.DocumentDownloader: INFO
+  pattern:
+    console: "%clr(${LOG_LEVEL_PATTERN:%5p}) %msg%n"
+
+spring:
+  main:
+    banner-mode: off
