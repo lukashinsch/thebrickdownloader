@@ -1,6 +1,6 @@
 # The Brick / Kühnehöfe property management document downloader
 
-Useful to download all documents from the 'old' management companie's portal.
+Useful to download all documents from the 'old' management company's portal.
 
 ## How to use
 
