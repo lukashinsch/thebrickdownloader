@@ -139,7 +139,7 @@ public class DocumentDownloader implements ApplicationRunner {
         return session;
     }
 
-    private void processDocuments(Document[] documents, String baseFolder) throws URISyntaxException, IOException, InterruptedException {
+    private void processDocuments(Document[] documents, String baseFolder) {
         log.info("About to download {} documents", documents.length);
         for (int i = 0; i < documents.length; i++) {
             Document document = documents[i];
